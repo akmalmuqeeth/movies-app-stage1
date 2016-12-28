@@ -3,6 +3,8 @@ package com.example.android.moviesprojectone;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.android.moviesprojectone.adapter.MoviesAdapter;
 import com.example.android.moviesprojectone.utilities.MovieDbJsonUtils;
 import com.example.android.moviesprojectone.utilities.NetworkUtils;
 
@@ -17,7 +20,10 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView moviesDisplay;
+    private RecyclerView mRecyclerView;
+    private MoviesAdapter mMoviesAdapter;
+
+
     TextView errorDisplay;
 
     ProgressBar progressBar;
@@ -27,10 +33,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        moviesDisplay = (TextView) findViewById(R.id.movies_display);
-        errorDisplay = (TextView) findViewById(R.id.error_display);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_movies);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+
+        mMoviesAdapter = new MoviesAdapter();
+        mRecyclerView.setAdapter(mMoviesAdapter);
+
+        errorDisplay = (TextView) findViewById(R.id.error_display);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+
         loadMovies();
 
     }
@@ -70,9 +85,7 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.INVISIBLE);
             if(moviesData != null) {
                 showMoviesDisplay();
-                for (String movie : moviesData) {
-                    moviesDisplay.append((movie) + "\n\n\n");
-                }
+                mMoviesAdapter.setMoviesData(moviesData);
             } else {
                 showErrorDisplay();
             }
@@ -80,12 +93,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showErrorDisplay(){
-        moviesDisplay.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
         errorDisplay.setVisibility(View.VISIBLE);
     }
 
     public void showMoviesDisplay(){
-        moviesDisplay.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
         errorDisplay.setVisibility(View.INVISIBLE);
     }
 
@@ -106,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            moviesDisplay.setText("");
             loadMovies();
             return true;
         }

@@ -4,38 +4,29 @@
 android:layout_width="match_parent"
 android:layout_height="match_parent">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_movies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:visibility="invisible"
-        android:id="@+id/movies_display"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textSize="20sp"
-        />
-</ScrollView>
-    <TextView
-        android:id="@+id/error_display"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/error"
-        android:visibility="invisible"
+    android:id="@+id/error_display"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:text="@string/error"
+    android:visibility="invisible"
         >
 
     </TextView>
 
     <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:visibility="invisible">
+    android:id="@+id/progress_bar"
+    android:layout_width="42dp"
+    android:layout_height="42dp"
+    android:layout_gravity="center"
+    android:visibility="invisible">
 
     </ProgressBar>
-
 
 
 </FrameLayout>

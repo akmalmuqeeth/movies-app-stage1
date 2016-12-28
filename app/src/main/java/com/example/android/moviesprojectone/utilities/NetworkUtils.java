@@ -21,7 +21,7 @@ public class NetworkUtils {
     private static final String MOVIEDB_BASE_URL = "https://api.themoviedb.org/3/movie/popular";
 
     private static final String API_KEY_PARAM = "api_key";
-    private static final String API_KEY_VALUE = "";
+    private static final String API_KEY_VALUE = Constants.API_KEY_VALUE;
 
     /**
      * Builds the URL used to talk to the MovieDB API.

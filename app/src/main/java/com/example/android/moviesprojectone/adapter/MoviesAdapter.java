@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.moviesprojectone.R;
+import com.example.android.moviesprojectone.dto.MovieDTO;
 
 /**
  * Created by akmal.muqeeth on 12/28/16.
@@ -15,7 +16,7 @@ import com.example.android.moviesprojectone.R;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>{
 
-    private String[] moviesData;
+    private MovieDTO[] moviesData;
 
     public MoviesAdapter(){
     }
@@ -33,8 +34,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
-        String movie = moviesData[position];
-        holder.mMovieTextView.setText(movie);
+        MovieDTO movie = moviesData[position];
+        holder.movieTitleTextView.setText(movie.getTitle());
+        holder.movieOverviewTextView.setText(movie.getOverview());
     }
 
     @Override
@@ -43,19 +45,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         return moviesData.length;
     }
 
-    public void setMoviesData(String[] data) {
+    public void setMoviesData(MovieDTO[] data) {
         moviesData = data;
         notifyDataSetChanged();
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        public final TextView mMovieTextView;
+        public final TextView movieTitleTextView;
+        public final TextView movieOverviewTextView;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
 
-            mMovieTextView = (TextView) itemView.findViewById(R.id.movie_data);
+            movieTitleTextView = (TextView) itemView.findViewById(R.id.movie_title);
+            movieOverviewTextView = (TextView) itemView.findViewById(R.id.movie_overview);
 
         }
     }

@@ -1,6 +1,6 @@
 package com.example.android.moviesprojectone.utilities;
 
-import android.content.Context;
+import com.example.android.moviesprojectone.dto.MovieDTO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,22 +12,31 @@ import org.json.JSONObject;
 
 public class MovieDbJsonUtils {
 
-    public static String[] getMovieResultsFromMovieDbJSON(String moviesJSONStr) throws JSONException {
+    public static MovieDTO[] getMovieResultsFromMovieDbJSON(String moviesJSONStr) throws JSONException {
 
         final String MOVIES_RESULTS = "results";
 
         final String MOV_ORIGINAL_TITLE = "original_title";
+        final String MOV_TITLE = "title";
+        final String MOV_POSTER_PATH = "poster_path";
+        final String MOV_OVERVIEW = "overview";
 
         JSONObject forecastJson = new JSONObject(moviesJSONStr);
         JSONArray moviesArray = forecastJson.getJSONArray(MOVIES_RESULTS);
 
         /* String array to hold each day's weather String */
-        String[] parsedMovieData = new String[moviesArray.length()];
+        MovieDTO[] parsedMovieData = new MovieDTO[moviesArray.length()];
 
         for (int i = 0; i < moviesArray.length(); i++) {
             JSONObject movieJSON = moviesArray.getJSONObject(i);
-            String movieTitle = movieJSON.getString(MOV_ORIGINAL_TITLE);
-            parsedMovieData[i] = movieTitle;
+
+            MovieDTO movieDTO = new MovieDTO();
+            movieDTO.setTitle(movieJSON.getString(MOV_TITLE));
+            movieDTO.setOriginalTitle(movieJSON.getString(MOV_ORIGINAL_TITLE));
+            movieDTO.setPosterPath(movieJSON.getString(MOV_POSTER_PATH));
+            movieDTO.setOverview(movieJSON.getString(MOV_OVERVIEW));
+
+            parsedMovieData[i] = movieDTO;
         }
 
         return parsedMovieData;

@@ -6,7 +6,14 @@
 
     <!--This TextView holds the  data for one particular movie-->
     <TextView
-        android:id="@+id/movie_data"
+        android:id="@+id/movie_title"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/movie_overview"
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

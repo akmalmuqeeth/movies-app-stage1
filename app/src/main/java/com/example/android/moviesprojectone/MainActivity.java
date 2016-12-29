@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.moviesprojectone.adapter.MoviesAdapter;
+import com.example.android.moviesprojectone.dto.MovieDTO;
 import com.example.android.moviesprojectone.utilities.MovieDbJsonUtils;
 import com.example.android.moviesprojectone.utilities.NetworkUtils;
 
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         new GetMoviesTask().execute();
     }
 
-    public class GetMoviesTask extends AsyncTask<String, Void, String[]> {
+    public class GetMoviesTask extends AsyncTask<String, Void, MovieDTO[]> {
 
         @Override
         protected void onPreExecute() {
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String[] doInBackground(String... params) {
+        protected MovieDTO[] doInBackground(String... params) {
 
             URL movieDbUrl = NetworkUtils.buildUrl();
 
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 String movieDbResponseJson = NetworkUtils
                         .getResponseFromHttpUrl(movieDbUrl);
 
-                String[] moviesData = MovieDbJsonUtils.getMovieResultsFromMovieDbJSON(movieDbResponseJson);
+                MovieDTO[] moviesData = MovieDbJsonUtils.getMovieResultsFromMovieDbJSON(movieDbResponseJson);
 
                 return moviesData;
 
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String[] moviesData) {
+        protected void onPostExecute(MovieDTO[] moviesData) {
             progressBar.setVisibility(View.INVISIBLE);
             if(moviesData != null) {
                 showMoviesDisplay();

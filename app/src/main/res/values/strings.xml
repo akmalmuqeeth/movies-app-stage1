@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MoviesProjectOne</string>
-    <string name="action_refresh">Refresh</string>
-    <string name="error">Could not fetch data. PLease try again later.</string>
+    <string name="app_name" title="app_name">MoviesProjectOne</string>
+    <string name="action_refresh" title="action_refresh">Refresh</string>
+    <string name="error" title="error">Could not fetch data. PLease try again later.</string>
 </resources>

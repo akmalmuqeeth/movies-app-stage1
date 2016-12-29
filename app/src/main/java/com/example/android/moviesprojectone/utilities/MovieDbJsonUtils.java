@@ -21,7 +21,7 @@ public class MovieDbJsonUtils {
         final String MOV_POSTER_PATH = "poster_path";
         final String MOV_OVERVIEW = "overview";
 
-        final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w185/";
+        final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w780/";
 
         JSONObject forecastJson = new JSONObject(moviesJSONStr);
         JSONArray moviesArray = forecastJson.getJSONArray(MOVIES_RESULTS);

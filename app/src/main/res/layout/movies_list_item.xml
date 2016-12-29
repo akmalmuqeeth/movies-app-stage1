@@ -12,12 +12,11 @@
         android:layout_height="wrap_content"
         android:padding="16dp"/>
 
-    <TextView
-        android:id="@+id/movie_overview"
-        style="@style/TextAppearance.AppCompat.Large"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"/>
+         />
 
     <!--This View serves as a visual divider between list items-->
     <View

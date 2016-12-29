@@ -21,6 +21,8 @@ public class MovieDbJsonUtils {
         final String MOV_POSTER_PATH = "poster_path";
         final String MOV_OVERVIEW = "overview";
 
+        final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w185/";
+
         JSONObject forecastJson = new JSONObject(moviesJSONStr);
         JSONArray moviesArray = forecastJson.getJSONArray(MOVIES_RESULTS);
 
@@ -33,7 +35,7 @@ public class MovieDbJsonUtils {
             MovieDTO movieDTO = new MovieDTO();
             movieDTO.setTitle(movieJSON.getString(MOV_TITLE));
             movieDTO.setOriginalTitle(movieJSON.getString(MOV_ORIGINAL_TITLE));
-            movieDTO.setPosterPath(movieJSON.getString(MOV_POSTER_PATH));
+            movieDTO.setPosterPath(POSTER_BASE_URL + movieJSON.getString(MOV_POSTER_PATH));
             movieDTO.setOverview(movieJSON.getString(MOV_OVERVIEW));
 
             parsedMovieData[i] = movieDTO;

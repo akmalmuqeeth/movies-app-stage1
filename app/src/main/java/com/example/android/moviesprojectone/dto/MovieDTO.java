@@ -1,10 +1,12 @@
 package com.example.android.moviesprojectone.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by akmal.muqeeth on 12/28/16.
  */
 
-public class MovieDTO {
+public class MovieDTO implements Serializable{
     private int id;
     private String title;
     private String originalTitle;

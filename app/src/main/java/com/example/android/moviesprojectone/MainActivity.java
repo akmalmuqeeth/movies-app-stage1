@@ -1,5 +1,7 @@
 package com.example.android.moviesprojectone;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.moviesprojectone.adapter.MoviesAdapter;
 import com.example.android.moviesprojectone.dto.MovieDTO;
@@ -20,7 +23,7 @@ import com.example.android.moviesprojectone.utilities.NetworkUtils;
 
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterOnClickHandler {
 
     private RecyclerView mRecyclerView;
     private MoviesAdapter mMoviesAdapter;
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        mMoviesAdapter = new MoviesAdapter();
+        mMoviesAdapter = new MoviesAdapter(this);
         mRecyclerView.setAdapter(mMoviesAdapter);
 
         errorDisplay = (TextView) findViewById(R.id.error_display);
@@ -58,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadMovies(){
         new GetMoviesTask().execute();
+    }
+
+    @Override
+    public void onClick(MovieDTO movieDTO) {
+
+        Intent startChildActivityIntent = new Intent(MainActivity.this, MovieDetailsActivity.class);
+        startChildActivityIntent.putExtra("movieDTOExtra", movieDTO);
+
+        startActivity(startChildActivityIntent);
     }
 
     public class GetMoviesTask extends AsyncTask<String, Void, MovieDTO[]> {

@@ -22,7 +22,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     private Context viewGroupContext;
 
-    public MoviesAdapter(){
+    /*
+    * An on-click handler that we've defined to make it easy for an Activity to interface with
+    * our RecyclerView
+    */
+    private final MoviesAdapterOnClickHandler mClickHandler;
+
+    public MoviesAdapter(MoviesAdapterOnClickHandler clickHandler){
+        mClickHandler = clickHandler;
+    }
+
+    /**
+     * The interface that receives onClick messages.
+     */
+    public interface MoviesAdapterOnClickHandler {
+        void onClick(MovieDTO movieId);
     }
 
     @Override
@@ -56,7 +70,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         notifyDataSetChanged();
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final TextView movieTitleTextView;
         public final ImageView imageView;
@@ -67,6 +81,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             movieTitleTextView = (TextView) itemView.findViewById(R.id.movie_title);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
 
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            int adapterPosition = getAdapterPosition();
+            MovieDTO movie = moviesData[adapterPosition];
+            mClickHandler.onClick(movie);
         }
     }
 }

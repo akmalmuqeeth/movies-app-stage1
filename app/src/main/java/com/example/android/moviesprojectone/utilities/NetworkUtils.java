@@ -3,6 +3,8 @@ package com.example.android.moviesprojectone.utilities;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.moviesprojectone.MainActivity;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -18,7 +20,8 @@ public class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String MOVIEDB_BASE_URL = "https://api.themoviedb.org/3/movie/popular";
+    private static final String BASE_URL_POPULARITY_API = "https://api.themoviedb.org/3/movie/popular";
+    private static final String BASE_URL_TOP_RATED_API = "https://api.themoviedb.org/3/movie/top_rated";
 
     private static final String API_KEY_PARAM = "api_key";
     private static final String API_KEY_VALUE = Constants.API_KEY_VALUE;
@@ -28,9 +31,11 @@ public class NetworkUtils {
      *
      * @return The URL to use to get popular movies.
      */
-    public static URL buildUrl() {
+    public static URL buildUrl(String sortBy) {
 
-        Uri builtUri = Uri.parse(MOVIEDB_BASE_URL).buildUpon()
+        String baseUrl = (sortBy == MainActivity.SORT_BY_TOP_RATED) ? BASE_URL_TOP_RATED_API : BASE_URL_POPULARITY_API;
+
+        Uri builtUri = Uri.parse(baseUrl).buildUpon()
                 .appendQueryParameter(API_KEY_PARAM, API_KEY_VALUE)
                 .build();
 

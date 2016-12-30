@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     private MoviesAdapter mMoviesAdapter;
 
     private static final Integer GRID_SPAN_COUNT = 2;
+    public static final String SORT_BY_POPULARITY = "SORT_BY_POPULARITY";
+    public static final String SORT_BY_TOP_RATED = "SORT_BY_TOP_RATED";
 
 
     TextView errorDisplay;
@@ -55,12 +57,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
 
-        loadMovies();
+        loadMovies(SORT_BY_POPULARITY);
 
     }
 
-    public void loadMovies(){
-        new GetMoviesTask().execute();
+    public void loadMovies(String sortBy){
+        new GetMoviesTask().execute(sortBy);
     }
 
     @Override
@@ -82,7 +84,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         @Override
         protected MovieDTO[] doInBackground(String... params) {
 
-            URL movieDbUrl = NetworkUtils.buildUrl();
+            String sortBy = params[0];
+            URL movieDbUrl = NetworkUtils.buildUrl(sortBy);
 
             try {
                 String movieDbResponseJson = NetworkUtils
@@ -136,8 +139,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh) {
-            loadMovies();
+        final String  sortBy = (id == R.id.sort_rating) ? SORT_BY_TOP_RATED : SORT_BY_POPULARITY;
+
+        if (sortBy !=null ) {
+            loadMovies(sortBy);
             return true;
         }
 

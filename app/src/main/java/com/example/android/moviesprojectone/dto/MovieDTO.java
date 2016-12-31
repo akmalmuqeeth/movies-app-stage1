@@ -13,6 +13,7 @@ public class MovieDTO implements Serializable{
     private String overview;
     private String releaseDate;
     private String posterPath;
+    private Double voteAverage;
     private Boolean isAdult;
 
     public Boolean getAdult() {
@@ -69,5 +70,13 @@ public class MovieDTO implements Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Double getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
     }
 }

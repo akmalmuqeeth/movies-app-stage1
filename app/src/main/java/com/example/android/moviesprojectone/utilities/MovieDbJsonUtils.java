@@ -20,6 +20,8 @@ public class MovieDbJsonUtils {
         final String MOV_TITLE = "title";
         final String MOV_POSTER_PATH = "poster_path";
         final String MOV_OVERVIEW = "overview";
+        final String MOV_VOTE_AVG = "vote_average";
+        final String MOV_REL_DATE = "release_date";
         final String MOV_ID = "id";
 
         final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w780/";
@@ -39,6 +41,8 @@ public class MovieDbJsonUtils {
             movieDTO.setOriginalTitle(movieJSON.getString(MOV_ORIGINAL_TITLE));
             movieDTO.setPosterPath(POSTER_BASE_URL + movieJSON.getString(MOV_POSTER_PATH));
             movieDTO.setOverview(movieJSON.getString(MOV_OVERVIEW));
+            movieDTO.setVoteAverage(movieJSON.getDouble(MOV_VOTE_AVG));
+            movieDTO.setReleaseDate(movieJSON.getString(MOV_REL_DATE));
 
             parsedMovieData[i] = movieDTO;
         }

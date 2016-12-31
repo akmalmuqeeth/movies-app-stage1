@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent" android:layout_height="wrap_content" xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/movie_detail_title">
 
-    </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@color/LightGrey"
+            android:textColor="@color/DarkRed"
+            android:textSize="22sp"
+            android:gravity="center_horizontal"
+            android:id="@+id/movie_detail_title">
 
+        </TextView>
+        <ImageView
+            android:id="@+id/movie_detail_poster"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@color/LightSlateGray"
+            android:textColor="@color/DarkRed"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:id="@+id/movie_detail_overview"
+            >
 
-</FrameLayout>
+        </TextView>
+</LinearLayout>
+</ScrollView>
